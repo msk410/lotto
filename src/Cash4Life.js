@@ -1,9 +1,12 @@
 /**
  * Created by mkimg on 9/29/17.
  */
+/**
+ * Created by mkimg on 9/29/17.
+ */
 import React, {Component} from 'react';
 
-export default class MegaMillions extends Component {
+export default class Cash4Life extends Component {
 
     getDate() {
         let date = this.props.numbers.draw_date.split("T")[0];
@@ -19,7 +22,7 @@ export default class MegaMillions extends Component {
     render() {
         return (
             <div>
-                Mega Millions
+                Cash 4 Life
                 Winning numbers {this.getDate()}
                 <br/>
                 <div>
@@ -34,12 +37,11 @@ export default class MegaMillions extends Component {
                         }
                     })}
                     <div style={{
-                        'background': 'red', 'width': '20px', 'height': 'auto',
+                        'background': 'red', 'width': '18px', 'height': 'auto',
                         'border': '1px solid black', 'borderRadius': '50%', 'display': 'inline-block'
                     }}>
-                        {this.props.numbers.mega_ball}
+                        {this.props.numbers.cash_ball[1]}
                     </div>
-                    &nbsp; x {this.props.numbers.multiplier[1]}
                 </div>
             </div>
         )

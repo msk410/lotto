@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import Powerball from "./Powerball";
 import MegaMillions from "./MegaMillions";
+import Cash4Life from "./Cash4Life"
+import NYPageScraper from "./NYPageScraper"
 export default class ResultsList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             powerballNumbers: [],
-            megaMillionsNumbers: []
+            megaMillionsNumbers: [],
+            cash4Life: []
         };
     }
 
@@ -30,14 +33,29 @@ export default class ResultsList extends Component {
             megaMillionsData.map((elem, index) => {
                 nums2.push(elem);
             })
+
+            const response3= await fetch(`https://data.ny.gov/resource/7pxf-c5iz.json`, {
+                method: "GET",
+            });
+            let c4lData = await response3.json();
+            let nums3 = [];
+            c4lData.map((elem, index) => {
+                nums3.push(elem);
+            })
+
+
+
             this.setState({
                 powerballNumbers: nums1,
-                megaMillionsNumbers: nums2
+                megaMillionsNumbers: nums2,
+                cash4Life: nums3
             })
         }
         catch (err) {
             console.log(err);
         }
+        let test = new NYPageScraper();
+
     }
 
     getPowerballNumbers() {
@@ -52,6 +70,12 @@ export default class ResultsList extends Component {
         }
     }
 
+    getC4LNumbers() {
+        if (this.state.cash4Life.length > 0) {
+            return <Cash4Life numbers={this.state.cash4Life["0"]}/>
+        }
+    }
+
 
     render() {
 
@@ -59,6 +83,7 @@ export default class ResultsList extends Component {
             <ul>
                 {this.getMegaMillionsNumbers()}
                 {this.getPowerballNumbers()}
+                {this.getC4LNumbers()}
 
             </ul>
         )
