@@ -19,9 +19,27 @@ export default class MegaMillions extends Component {
     render() {
         return (
             <div>
+                MegaMillions
                 Winning numbers {this.getDate()}
                 <br/>
                 <div>
+                    {this.getNumbers().map((elem, index) => {
+                        if (index < 5) {
+                            return <div style={{
+                                'background': 'white', 'display': 'inline-block', 'width': '20px', 'height': 'auto',
+                                'border': '1px solid black', 'borderRadius': '50%', 'padding': "2px"
+                            }}>
+                                {elem}
+                            </div>
+                        }
+                    })}
+                    <div style={{
+                        'background': 'red', 'width': '20px', 'height': 'auto',
+                        'border': '1px solid black', 'borderRadius': '50%', 'display': 'inline-block'
+                    }}>
+                        {this.props.numbers.mega_ball}
+                    </div>
+                    &nbsp; x {this.props.numbers.multiplier[1]}
                 </div>
             </div>
         )

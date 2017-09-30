@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Powerball from "./Powerball";
-import MegaMillions from "./MegaMillion";
+import MegaMillions from "./MegaMillions";
 export default class ResultsList extends Component {
 
     constructor(props) {
@@ -38,7 +38,6 @@ export default class ResultsList extends Component {
         catch (err) {
             console.log(err);
         }
-        alert(this.state.megaMillionsNumbers.length)
     }
 
     getPowerballNumbers() {

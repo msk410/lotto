@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 
 export default class Powerball extends Component {
 
-    getDate() { alert(this.props.numbers.draw_date)
-        }
+    getDate() {
         let date = this.props.numbers.draw_date.split("T")[0];
         let d = new Date(date);
         return (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "/" + d.getFullYear()
@@ -37,6 +36,7 @@ export default class Powerball extends Component {
                     }}>
                         {this.getNumbers()[5]}
                     </div>
+                    &nbsp; x {this.props.numbers.multiplier}
                 </div>
             </div>
         )
