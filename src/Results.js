@@ -20,7 +20,7 @@ export default class Results extends Component {
                             'background': 'white', 'display': 'inline-block', 'width': '20px', 'height': 'auto',
                             'border': '1px solid black', 'borderRadius': '50%', 'padding': "2px"
                         }}>
-                            {elem[0] === "0" ? elem[1] : elem}
+                            {elem[0] === "0" & elem.length > 1 ? elem[1] : elem}
                         </div>
 
                     })}
@@ -30,7 +30,7 @@ export default class Results extends Component {
                     }}>
                         {this.props.numbers[0].bonus[0] === "0" ? this.props.numbers[0].bonus[1] : this.props.numbers[0].bonus}
                     </div> : ""}
-                    {this.props.numbers[0].extra.length !==0 ? (this.props.numbers[0].extra[0] === "0" ? " x " + this.props.numbers[0].extra[1] : " x " + this.props.numbers[0].extra) : ""}
+                    {this.props.numbers[0].extra.length !==0 ? (this.props.numbers[0].extra[0] === "0" ? this.props.numbers[0].extraText + this.props.numbers[0].extra[1] : this.props.numbers[0].extraText + this.props.numbers[0].extra) : ""}
                 </div>
             </div>
         )
