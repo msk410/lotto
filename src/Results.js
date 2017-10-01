@@ -12,7 +12,7 @@ export default class Results extends Component {
     render() {
         return (
             <div>
-                {this.props.numbers[0].name} &nbsp; {this.getDate()}
+                {this.props.numbers[0].name}  {this.getDate()}
                 <br/>
                 <div>
                     {this.props.numbers[0].winningNumbers.map((elem, index) => {
@@ -24,13 +24,13 @@ export default class Results extends Component {
                         </div>
 
                     })}
-                    <div style={{
+                    {this.props.numbers[0].bonus.length != 0 ? <div style={{
                         'background': 'red', 'width': '20px', 'height': 'auto',
                         'border': '1px solid black', 'borderRadius': '50%', 'display': 'inline-block'
                     }}>
                         {this.props.numbers[0].bonus[0] === "0" ? this.props.numbers[0].bonus[1] : this.props.numbers[0].bonus}
-                    </div>
-                    &nbsp; x {this.props.numbers[0].extra[0] === "0" ? this.props.numbers[0].extra[1] : this.props.numbers[0].extra}
+                    </div> : ""}
+                    {this.props.numbers[0].extra.length !==0 ? (this.props.numbers[0].extra[0] === "0" ? " x " + this.props.numbers[0].extra[1] : " x " + this.props.numbers[0].extra) : ""}
                 </div>
             </div>
         )

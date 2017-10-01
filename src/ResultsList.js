@@ -42,32 +42,43 @@ export default class ResultsList extends Component {
                 nums2.push(tempGame);
             })
 
-            // const response3= await fetch(`https://data.ny.gov/resource/7pxf-c5iz.json`, {
-            //     method: "GET",
-            // });
-            // let c4lData = await response3.json();
-            // let nums3 = [];
-            // c4lData.map((elem, index) => {
-            //     nums3.push(elem);
-            // })
-            // const response4 = await fetch(`https://data.ny.gov/resource/etu4-7qqz.json`, {
-            //     method: "GET",
-            // });
-            // let nyLotto = await response4.json();
-            // let nums4 = [];
-            // nyLotto.map((elem, index) => {
-            //     nums4.push(elem);
-            // })
-            // const response5 = await fetch(`https://data.ny.gov/resource/hh4x-xmbw.json`, {
-            //     method: "GET",
-            // });
-            // let take5 = await response5.json();
-            // let nums5 = [];
-            // take5.map((elem, index) => {
-            //     nums5.push(elem);
-            // })
+            //cash 4 life
+            const response3= await fetch(`https://data.ny.gov/resource/7pxf-c5iz.json`, {
+                method: "GET",
+            });
+            let c4lData = await response3.json();
+            let nums3 = [];
+            c4lData.map((elem, index) => {
+                let tempGame = new Game("Cash 4 Life", elem.draw_date, elem.winning_numbers.split(" "),
+                    elem.cash_ball, "")
+                nums3.push(tempGame);
+            })
+            const response4 = await fetch(`https://data.ny.gov/resource/etu4-7qqz.json`, {
+                method: "GET",
+            });
+            let nyLotto = await response4.json();
+            let nums4 = [];
+            nyLotto.map((elem, index) => {
+                let tempGame = new Game("New York Lotto", elem.draw_date, elem.winning_numbers.split(" "),
+                    elem.bonus, "")
+                nums4.push(tempGame);
+            })
+            const response5 = await fetch(`https://data.ny.gov/resource/hh4x-xmbw.json`, {
+                method: "GET",
+            });
+            let take5 = await response5.json();
+            let nums5 = [];
+            take5.map((elem, index) => {
+                let tempGame = new Game("Take 5", elem.draw_date, elem.winning_numbers.split(" "),
+                    "", "")
+                nums5.push(tempGame);
+            })
+
             lottoData.push(nums2);
             lottoData.push(nums1);
+            lottoData.push(nums4);
+            lottoData.push(nums3);
+            lottoData.push(nums5);
 
             this.setState({
                 // powerballNumbers: nums1,
