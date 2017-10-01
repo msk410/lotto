@@ -1,44 +1,38 @@
+
 import React, {Component} from 'react';
 
 export default class Results extends Component {
 
     getDate() {
-        let date = this.props.numbers.draw_date.split("T")[0];
+        let date = this.props.numbers[0].date.split("T")[0];
         let d = new Date(date);
         return (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "/" + d.getFullYear()
-    }
-
-    getNumbers() {
-        let winningNumbers = this.props.numbers.winning_numbers.split(" ")
-        return winningNumbers;
     }
 
     render() {
         return (
             <div>
-                Winning numbers dsfsdf{this.getDate()}
+                {this.props.numbers[0].name} &nbsp; {this.getDate()}
                 <br/>
                 <div>
-                    {this.getNumbers().map((elem, index) => {
-                        if (index < 5) {
-                            return <div style={{
-                                'background': 'white', 'display': 'inline-block', 'width': '20px', 'height': 'auto',
-                                'border': '1px solid black', 'borderRadius': '50%', 'padding': "2px"
-                            }}>
-                                {elem}
-                            </div>
-                        }
+                    {this.props.numbers[0].winningNumbers.map((elem, index) => {
+                        return <div style={{
+                            'background': 'white', 'display': 'inline-block', 'width': '20px', 'height': 'auto',
+                            'border': '1px solid black', 'borderRadius': '50%', 'padding': "2px"
+                        }}>
+                            {elem[0] === "0" ? elem[1] : elem}
+                        </div>
+
                     })}
                     <div style={{
                         'background': 'red', 'width': '20px', 'height': 'auto',
                         'border': '1px solid black', 'borderRadius': '50%', 'display': 'inline-block'
                     }}>
-                        {this.getNumbers()[5]}
+                        {this.props.numbers[0].bonus[0] === "0" ? this.props.numbers[0].bonus[1] : this.props.numbers[0].bonus}
                     </div>
+                    &nbsp; x {this.props.numbers[0].extra[0] === "0" ? this.props.numbers[0].extra[1] : this.props.numbers[0].extra}
                 </div>
             </div>
         )
     }
 }
-
-
