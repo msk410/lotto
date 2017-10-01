@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Powerball from "./Powerball";
 import MegaMillions from "./MegaMillions";
 import Cash4Life from "./Cash4Life"
-import NYPageScraper from "./NYPageScraper"
+import Take5 from "./Take5"
+import NyLotto from "./NyLotto"
 export default class ResultsList extends Component {
 
     constructor(props) {
@@ -10,7 +11,9 @@ export default class ResultsList extends Component {
         this.state = {
             powerballNumbers: [],
             megaMillionsNumbers: [],
-            cash4Life: []
+            cash4Life: [],
+            nyLotto: [],
+            take5: []
         };
     }
 
@@ -42,19 +45,34 @@ export default class ResultsList extends Component {
             c4lData.map((elem, index) => {
                 nums3.push(elem);
             })
-
-
+            const response4 = await fetch(`https://data.ny.gov/resource/etu4-7qqz.json`, {
+                method: "GET",
+            });
+            let nyLotto = await response4.json();
+            let nums4 = [];
+            nyLotto.map((elem, index) => {
+                nums4.push(elem);
+            })
+            const response5 = await fetch(`https://data.ny.gov/resource/hh4x-xmbw.json`, {
+                method: "GET",
+            });
+            let take5 = await response5.json();
+            let nums5 = [];
+            take5.map((elem, index) => {
+                nums5.push(elem);
+            })
 
             this.setState({
                 powerballNumbers: nums1,
                 megaMillionsNumbers: nums2,
-                cash4Life: nums3
+                cash4Life: nums3,
+                nyLotto: nums4,
+                take5: nums5
             })
         }
         catch (err) {
             console.log(err);
         }
-        let test = new NYPageScraper();
 
     }
 
@@ -76,6 +94,18 @@ export default class ResultsList extends Component {
         }
     }
 
+    getNYLottoNumbers() {
+        if (this.state.cash4Life.length > 0) {
+            return <NyLotto numbers={this.state.nyLotto["0"]}/>
+        }
+    }
+
+    getTake5Numbers() {
+        if (this.state.take5.length > 0) {
+            return <Take5 numbers={this.state.take5["0"]}/>
+        }
+    }
+
 
     render() {
 
@@ -84,6 +114,8 @@ export default class ResultsList extends Component {
                 {this.getMegaMillionsNumbers()}
                 {this.getPowerballNumbers()}
                 {this.getC4LNumbers()}
+                {this.getNYLottoNumbers()}
+                {this.getTake5Numbers()}
 
             </ul>
         )
